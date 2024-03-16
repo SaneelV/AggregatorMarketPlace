@@ -44,4 +44,12 @@ public class ProductService {
 		productRepository.deleteById(productId);
 		return "Product deleted successfully";
 	}
+
+	public Object approveOrDecline(int productId, int status) {
+		Product p=productRepository.findById(productId).get();
+		p.setStatus(status);
+		p.setUpdatedDate(new Date());
+		productRepository.save(p);
+		return "Status Changed";
+	}
 }

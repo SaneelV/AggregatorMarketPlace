@@ -29,4 +29,8 @@ public class ProductController {
     public ResponseEntity<?> deleteProductById(@PathVariable("productId") int productId) {
         return ResponseEntity.ok(productService.deleteProductById(productId));
     }
+    @PutMapping("/approveOrDecline/{productId}/{status}")
+    public ResponseEntity<?> approveOrDecline(@PathVariable("productId") int productId,@PathVariable("status") int status) {
+        return ResponseEntity.ok(productService.approveOrDecline(productId,status));
+    }
 }

@@ -119,7 +119,7 @@
 								title: "Status",
 								data: null,
 								render: function (data, type, row) {
-									return (data.status == 0) ? "NotApproved" : "Approved";
+									return (data.status == 0) ? "NotApproved" :(data.status == 1) ? "Approved":"Declined";
 								}
 							},
 							{data: 'createdDate', title: 'CreatedDate'},
