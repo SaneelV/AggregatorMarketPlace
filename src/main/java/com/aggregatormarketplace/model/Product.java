@@ -12,7 +12,7 @@ public class Product {
 	private Integer productId;
 	private String productName;
 	private String  productDescription;
-	private int Status;
+	private int status;
 	private Date createdDate;
 	private Date UpdatedDate;
 
@@ -50,12 +50,14 @@ public class Product {
 		this.productDescription = productDescription;
 	}
 
+	
+
 	public int getStatus() {
-		return Status;
+		return status;
 	}
 
 	public void setStatus(int status) {
-		Status = status;
+		this.status = status;
 	}
 
 	public Date getCreatedDate() {

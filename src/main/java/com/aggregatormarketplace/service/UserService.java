@@ -1,5 +1,6 @@
 package com.aggregatormarketplace.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,31 @@ import com.aggregatormarketplace.repository.UserRepository;
 public class UserService {
 	
 	@Autowired
-	UserRepository userRepo;
+	UserRepository userRepository;
 
 	public String validateUsernamePassowrd(String username, String password) {
 		
-		Optional<Users> userCredentials = userRepo.findByUsernameAndPassword(username,password);
+		Optional<Users> userCredentials = userRepository.findByUsernameAndPassword(username,password);
 		
 		
 		return userCredentials.isEmpty()?null : userCredentials.get().getPage();
+	}
+
+	public List<Users> getUsersList() {
+		// TODO Auto-generated method stub
+		
+		return userRepository.findAll();
+	}
+
+	public void saveUsers(Users users) {
+		userRepository.save(users);
+		
+	}
+	
+
+	public Users editUsersByID(long id) {
+		 Users user = userRepository.findById(id).orElseThrow();
+			return user;
 	}
 	
 	

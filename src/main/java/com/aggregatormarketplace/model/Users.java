@@ -6,6 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="users")
@@ -16,9 +21,11 @@ public class Users {
     @Column(name="UserId")
     private Long userId;
     
+    @NotBlank(message = "Name is mandatory")
     @Column(name="Username")
     private String username;
     
+    @NotBlank(message = "Passowrd is mandatory")
     @Column(name="Password")
     private String password;
     

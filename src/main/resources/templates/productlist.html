@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="users.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+        integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Aggregator MarketPlace</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/getUserslist">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/getProductslist">Products</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <form id="logoutForm" action="/logout" method="post">
+                        <button type="submit" class="btn btn-link nav-link">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+	<div th:switch="${productDetails}" class="container my-5">
+		<p class="my-5">
+			<a href="/addProduct" class="btn btn-primary"><i class="fas fa-user-plus ml-2"> Add Product</i></a>
+		</p>
+		<div class="col-md-10">
+			<h2 th:case="null">No Products yet!</h2>
+			<div th:case="*">
+				<h2>Product List</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Product ID</th>
+							<th>Product Name</th>
+							<th>Product Description</th>
+							<th>Approval Status</th>
+							<th>Approved By</th>
+							<th>Approved</th>
+							<th>Description</th>
+							<th>Name</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="product : ${productDetails}">
+							<td th:text="${product.productId}"></td>
+							<td th:text="${product.productName}"></td>
+							<td th:text="${product.productDescription}"></td>
+							<td th:text="${product.status}"></td>
+							<td><a th:href="@{/editProduct/{id}(id=${product.productId})}" class="btn btn-primary"><i
+										class="fas fa-user-edit ml-2"></i></a></td>
+							<td><a th:href="@{/deleteProduct/{id}(id=${product.productId})}" class="btn btn-primary"><i
+										class="fas fa-user-times ml-2"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+	<!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <hr>
+            <p>&copy; 2024 Your App Name. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

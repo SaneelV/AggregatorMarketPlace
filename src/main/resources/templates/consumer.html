@@ -1,1 +1,87 @@
-<h1>admin</h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<style>
+		thead {
+			background-color: aqua;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Consumer</h1>
+
+	<h3>Product List</h3>
+	<table id="myTable" class="display compact nowrap">
+
+	</table>
+
+	<script>
+
+		const API_URL = 'http://localhost:8080/api/consumer';
+		$(document).ready(function () {loadProducts();});
+
+		function showForm(t) {
+			if (!t)
+				$("#productId").val('')
+
+			if ($("#formContainer").css('display') == 'none')
+				$('#formContainer').show();
+			else
+				$('#formContainer').hide();
+		}
+		function loadProducts() {
+			$.ajax({
+				url: API_URL + "/allConsumerProducts",
+				method: 'GET',
+				success: function (resp) {
+					console.log(resp);
+
+					if ($.fn.dataTable.isDataTable('#myTable')) {
+						$('#myTable').DataTable().destroy();
+						$('#myTable').html('');
+						//$('#myTable tbody').off('click', 'tr');
+						$('#myTable').off('click', '.dowloadButton');
+					}
+
+					var table = $('#myTable').DataTable({
+						data: resp,
+						columns: [
+							{data: 'productId', title: 'ProductId'},
+							{data: 'productName', title: 'ProductName'},
+							{data: 'productDescription', title: 'ProductDescription'},
+							{data: 'createdDate', title: 'CreatedDate'},
+							{
+								title: "Action",
+								data: null,
+								render: function (data, type, row) {
+									return '<button class="dowloadButton">Download</button>';
+								}
+							}
+						]
+					});
+
+
+					$('#myTable').on('click', '.dowloadButton', function () {
+						var data = table.row($(this).parents('tr')).data();
+						downloadProduct(data);
+
+					});
+				}
+			});
+		}
+
+
+
+
+	</script>
+</body>
+
+</html>
