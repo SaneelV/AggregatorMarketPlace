@@ -1,43 +1,76 @@
 package com.aggregatormarketplace.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Date;
 
 @Entity
+@Table
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String description;
-    private boolean approved;
-    // Getters and setters
-	public Long getId() {
-		return id;
+    @GeneratedValue//(strategy = GenerationType.IDENTITY)
+	private Integer productId;
+	private String productName;
+	private String  productDescription;
+	private int Status;
+	private Date createdDate;
+	private Date UpdatedDate;
+
+/*	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "approvedBy", referencedColumnName = "userId")
+	private Users approvedBy;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "createdBy", referencedColumnName = "userId")
+	private Users createdBy;*/
+
+	public Product() {
 	}
-	public void setId(Long id) {
-		this.id = id;
+
+	public Integer getProductId() {
+		return productId;
 	}
-	public String getName() {
-		return name;
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public String getProductName() {
+		return productName;
 	}
-	public String getDescription() {
-		return description;
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public String getProductDescription() {
+		return productDescription;
 	}
-	public boolean isApproved() {
-		return approved;
+
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
-	public void setApproved(boolean approved) {
-		this.approved = approved;
+
+	public int getStatus() {
+		return Status;
 	}
-    
-    
+
+	public void setStatus(int status) {
+		Status = status;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getUpdatedDate() {
+		return UpdatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		UpdatedDate = updatedDate;
+	}
 }
