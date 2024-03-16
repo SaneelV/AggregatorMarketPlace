@@ -82,10 +82,13 @@
 			$("#productName").val(data.productName);
 			$("#productDescription").val(data.productDescription);
 			//$("#type").val(1);
-			showForm();
+			showForm(1);
 
 		}
-		function showForm() {
+		function showForm(t) {
+			if (!t)
+				$("#productId").val('')
+
 			if ($("#formContainer").css('display') == 'none')
 				$('#formContainer').show();
 			else
